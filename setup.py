@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from setuptools import setup
+from setuptools import setup, find_packages
 from emoticon import __version__ as version, __doc__ as description
 
 
@@ -11,12 +11,13 @@ def fread(filepath):
 setup(
     name='o3o.py',
     version=version,
-    include_package_data=True,
     install_requires=[
         'PyYAML',
     ],
     zip_safe=False,
-    py_modules=['emoticon', 'emoticon.cli', 'emoticon.main'],
+    packages=find_packages(),
+    package_data={'': ['emoticon/emo.yaml']},
+    include_package_data=True,
     entry_points={
         'console_scripts': [
             'o3o = emoticon.cli:main',

@@ -1,5 +1,6 @@
 ===============
-o3o
+o3o.py
 ===============
 
-A python emoticon CLI tool.
+A Python emoticon CLI tool.
+

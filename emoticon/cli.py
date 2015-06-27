@@ -8,5 +8,7 @@ def main():
     parser = argparse.ArgumentParser(description='')
     parser.add_argument('emo', help='Get an emoticon!')
     args = parser.parse_args()
-    print(get_random_emoticon(args.emo, emoticon_map))
-
+    try:
+        print(get_random_emoticon(args.emo.decode('utf-8'), emoticon_map))
+    except IndexError:
+        print('Emoticon not found~~')

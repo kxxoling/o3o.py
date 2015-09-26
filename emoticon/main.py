@@ -2,14 +2,18 @@
 import os
 import random
 import yaml
+from emoticon import find_emoticon_data_files
 
 
 abs_dir = os.path.dirname(__file__)
 emo_yaml_dir = os.path.join(abs_dir, 'emo.yaml')
 
 
-def gen_emoticon_map(emoticon_list):
-    emoticon_map = dict()
+def gen_emoticon_map(emoticon_list, default=None):
+    if default is None:
+        emoticon_map = dict()
+    else:
+        emoticon_map = default
     for emoticon in emoticon_list:
         emotions = emoticon.get('tags', '').split(' ')
         for emotion in emotions:
@@ -17,9 +21,11 @@ def gen_emoticon_map(emoticon_list):
     return emoticon_map
 
 
-with open(emo_yaml_dir) as f:
-    emo_yaml = yaml.load(f)
-    emoticon_map = gen_emoticon_map(emo_yaml)
+emoticon_map = None
+for yaml_file in find_emoticon_data_files():
+    with open(yaml_file) as f:
+        emo_yaml = yaml.load(f)
+        emoticon_map = gen_emoticon_map(emo_yaml, default=emoticon_map)
 
 
 def get_random_emoticon(emotion, emoticon_map):

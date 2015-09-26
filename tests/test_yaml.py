@@ -12,7 +12,7 @@ class YAMLFileTest(unittest.TestCase):
 
     def test_find_emoticon_data_files(self):
         yaml_files = find_emoticon_data_files()
-        self.assertEqual(1, len(yaml_files))
+        self.assertEqual(2, len(yaml_files))
         for f in yaml_files:
             assert f.endswith('.yaml')
 
